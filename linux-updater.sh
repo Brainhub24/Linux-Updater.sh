@@ -3,7 +3,7 @@
 ########################################################################
 # Developer: Brainhub24
 # Project: Linux Updater Script
-# Version: 1.0.0
+# Version: 1.1.1
 # Description: The Linux Updater Script is a robust and efficient
 #              tool meticulously crafted to streamline package
 #              management on diverse Linux distributions. It automates
@@ -12,6 +12,9 @@
 #              up-to-date, and optimized.
 #
 # Changelog:
+#
+#   - Version 1.1.1 (2023-07-04):
+#     * Comment and Version fix
 #
 #   - Version 1.1.0 (2023-07-04):
 #     * Added a flag argument that can be used to cleanup.
