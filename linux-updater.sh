@@ -13,6 +13,10 @@
 #
 # Changelog:
 #
+#   - Version 1.1.0 (2023-07-04):
+#     * Added a flag argument that can be used to cleanup.
+#       [./linux-updater.sh -rm libs]
+#
 #   - Version 1.0.0 (2023-07-04):
 #     * Support for the most commonly used Linux distributions like Debian, Ubuntu, openSUSE, Red Hat, and CentOS.
 #
@@ -20,6 +24,41 @@
 #     * Initial release of the Linux Updater Script (The simple way!).
 #       [sudo apt update && sudo apt upgrade -y] on Debian-based distros
 ########################################################################
+
+# Function to display a warning and confirmation prompt
+confirm_removal() {
+  read -rp "Warning: This will remove libraries and packages. Are you sure you want to proceed? (y/n): " choice
+  case "$choice" in
+    [Yy]*)
+      echo "Starting the removal process..."
+      ;;
+    *)
+      echo "Removing all libraries and packages stopped..."
+      exit 0
+      ;;
+  esac
+}
+
+# Process command line arguments
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    -rm)
+      if [[ "$2" == "libs" ]]; then
+        confirm_removal
+        echo "Executing the remove_libs.sh script..."
+        sudo wget https://github.com/Brainhub24/Remove-Librarys/remove_libs.sh
+        sudo chmod +x remove_libs.sh
+        sudo ./remove_libs.sh
+        exit 0
+      fi
+      ;;
+    *)
+      echo "Invalid argument: $1"
+      exit 1
+      ;;
+  esac
+  shift
+done
 
 # Function to update Debian-based distributions (Debian, Ubuntu)
 update_debian() {
